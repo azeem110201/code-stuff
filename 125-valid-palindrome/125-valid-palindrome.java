@@ -6,11 +6,11 @@ class Solution {
         s = s.replaceAll("[^A-Za-z0-9]", "");
         s = s.toLowerCase();
         
-        char[] arr = s.toCharArray();
-        int i = 0, j = arr.length - 1;
+        // char[] arr = s.toCharArray();
+        int i = 0, j = s.length() - 1;
         
         while(i < j){
-            if(arr[i] != arr[j]){
+            if(s.charAt(i) != s.charAt(j)){
                 return false;
             }
             i++;
