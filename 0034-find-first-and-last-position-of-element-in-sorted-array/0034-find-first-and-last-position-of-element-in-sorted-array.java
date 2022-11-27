@@ -1,29 +1,33 @@
 class Solution {
     public int[] searchRange(int[] nums, int target) {
-        if(nums.length == 1 && nums[0] != target){
-            return new int[]{ -1, -1 };
+        
+        int[] ans = new int[]{ -1, -1 };
+        
+        ans[0] = searchIndex(nums, target, true);
+        if(ans[0] != -1){
+            ans[1] = searchIndex(nums, target, false);
         }
         
-        if(nums.length == 1 && nums[0] == target){
-            return new int[]{ 0, 0 };
+        return ans;
+        
+    }
+    
+    public int searchIndex(int[] nums, int target, boolean isFirstIndex) {
+        int start = 0;
+        int end = nums.length - 1;
+        int ans = -1;
+        
+        while(start <= end) {
+            int mid = start + (end - start) / 2;
+            if(nums[mid] > target) end = mid - 1;
+            else if(nums[mid] < target) start = mid + 1;
+            else {
+                ans = mid;
+                if(isFirstIndex) end = mid - 1;
+                else start = mid + 1;
+            }
         }
         
-        int first = 0;
-        int last = nums.length - 1;
-        
-        while(first <= last){
-            if(nums[first] != target) first++;
-            if(nums[last] != target) last--;
-            
-            if(nums[first] == target && nums[last] == target) break;
-        }
-        
-        if(first > last){
-            return new int[]{-1, -1};
-        }
-        
-        return new int[]{first, last};
-        
-        
+        return ans;
     }
 }
